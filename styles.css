@@ -1,0 +1,85 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  min-width: 300px;
+  background-color: #c4b5b5;
+}
+
+/* Header Styling */
+.header {
+  background-color: #252525;
+  padding: 30px;
+  text-align: center;
+  color: rgb(226, 226, 226);
+  font-size: 24px;
+}
+
+/* Input and Add Button */
+input {
+  width: 70%;
+  padding: 15px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+button.addBtn {
+  padding: 15px;
+  background-color: #4CAF50;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button.addBtn:hover {
+  background-color: #45a049;
+}
+
+/* Task List Styling */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li.task {
+  padding: 15px;
+  background-color: white;
+  font-size: 18px;
+  position: relative;
+  transition: background-color 0.2s;
+  cursor: pointer;
+  border-bottom: 1px solid #ffffff;
+}
+
+li.task:hover {
+  background-color: #ffffff;
+}
+
+li.task.checked {
+  text-decoration: line-through;
+  color: #b13d3d;
+}
+
+span.close {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+span.close:hover {
+  color: darkred;
+}
