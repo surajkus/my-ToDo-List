@@ -26,8 +26,6 @@ This is a minimalistic to-do list application built using HTML, CSS, and JavaScr
     Tasks are displayed as list items, and they toggle a checked class when clicked.
     Each task includes a close button to remove it from the list.
 
-# Screenshot
-
 # License
 
 This project is licensed under the MIT License.
