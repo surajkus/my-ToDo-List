@@ -1,207 +1,198 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {
-  margin: 0;
-
-  min-width: 150px;
-
-  min-width: 300px;
-
-}
-
-/* Include the padding and border in an element's total width and height */
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>Todo List</title>
+   <style>
+      /* General Reset */
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-/* Remove margins and padding from the list */
-ul {
+body {
+  font-family: Arial, sans-serif;
   margin: 0;
-  padding: 0;
+  min-width: 300px;
 }
 
-/* Style the list items */
-ul li {
-  cursor: pointer;
-  position: relative;
-  padding: 12px 8px 12px 40px;
-  list-style-type: none;
-  background: white;
-  font-size: 18px;
-  transition: 0.2s;
-  
-  /* make the list items unselectable */
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* Set all odd list items to a different color (zebra-stripes) */
-ul li:nth-child(odd) {
-  background: #f9f9f9;
-}
-
-/* Darker background-color on hover */
-ul li:hover {
-  background: #ddd;
-}
-
-/* When clicked on, add a background color and strike out text */
-ul li.checked {
-  background: #888;
-  color: #fff;
-  text-decoration: line-through;
-}
-
-/* Add a "checked" mark when clicked on */
-ul li.checked::before {
-  content: '';
-  position: absolute;
-  border-color: #2d552fee;
-  border-style: solid;
-  border-width: 0 2px 2px 0;
-  top: 10px;
-  left: 16px;
-  transform: rotate(45deg);
-  height: 15px;
-  width: 7px;
-}
-
-/* Style the close button */
-.close {
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 12px 16px 12px 16px;
-}
-
-.close:hover {
-  background-color: #62a765ee;
-  color: grey;
-}
-
-/* Style the header */
+/* Header Styling */
 .header {
   background-color: grey;
-  padding: 30px 40px;
-  color: rgb(8, 8, 8);
+  padding: 30px;
   text-align: center;
+  color: black;
 }
 
-/* Clear floats after the header */
-.header:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Style the input */
+/* Input and Add Button */
 input {
-  margin: 1;
-  border: none;
-  border-radius: 0;
-  width: 80%;
+  width: 75%;
   padding: 10px;
-  float: left;
+  border: none;
   font-size: 15px;
 }
 
-/* Style the "Add" button */
 .addBtn {
-  padding: 10px;
   width: 25%;
-  background: #d9d9d9;
-  color: #62a765ee;
-  float: left;
-  text-align: center;
-  font-size: 16px;
-  font-style:bold;
+  padding: 10px;
+  background-color: #d9d9d9;
+  color: #62a765;
   cursor: pointer;
-  transition: 0.3s;
+  font-size: 16px;
 }
 
 .addBtn:hover {
-  background-color: rgb(105, 108, 146);
+  background-color: #696c92;
+  color: white;
 }
-</style>
+
+/* Task List Styling */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li.task {
+  padding: 12px;
+  background-color: white;
+  font-size: 18px;
+  position: relative;
+  transition: background-color 0.2s;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Zebra stripes for odd items */
+li.task:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+li.task:hover {
+  background-color: #ddd;
+}
+
+li.checked {
+  background-color: #888;
+  color: white;
+  text-decoration: line-through;
+}
+
+li.checked::before {
+  content: '';
+  position: absolute;
+  left: 16px;
+  top: 10px;
+  width: 7px;
+  height: 15px;
+  border: solid #2d552f;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Close button */
+.close {
+  position: absolute;
+  right: 16px;
+  top: 12px;
+  cursor: pointer;
+}
+
+.close:hover {
+  background-color: #62a765;
+  color: grey;
+}
+
+   </style>
 </head>
 <body>
 
-<div id="myDIV" class="header">
-  <h2 style="margin:5px">My To Do List</h2>
-  <input type="text" id="myInput" placeholder="today's tasks....">
-  <span onclick="newElement()" class="addBtn">Add</span>
-</div>
+  <div id="todo-header" class="header">
+    <h2>My To-Do List</h2>
+    <input type="text" id="taskInput" placeholder="Enter today's tasks...">
+    <button onclick="addTask()" class="addBtn">Add</button>
+  </div>
 
-<ul id="myUL">
-  <li>gym</li>
-  <li class="checked">clear bills</li>
-  <li>Buy veggisss</li>
-  <li>Read novel</li>
-  <li>room cleaning</li>
-</ul>
+  <ul id="taskList">
+    <li class="task">Gym<span class="close">&times;</span></li>
+    <li class="task checked">Clear bills<span class="close">&times;</span></li>
+    <li class="task">Buy vegetables<span class="close">&times;</span></li>
+    <li class="task">Read novel<span class="close">&times;</span></li>
+    <li class="task">Room cleaning<span class="close">&times;</span></li>
+  </ul>
 
-<script>
-// Create a "close" button and append it to each list item
-var myNodelist = document.getElementsByTagName("LI");
-var i;
-for (i = 0; i < myNodelist.length; i++) {
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  myNodelist[i].appendChild(span);
-}
+  <script>
+ // Initialize the to-do list by attaching event listeners to the close buttons
+document.addEventListener('DOMContentLoaded', function () {
+  addCloseButtons();
+  toggleTaskStatus();
+});
 
-// Click on a close button to hide the current list item
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function() {
-    var div = this.parentElement;
-    div.style.display = "none";
-  }
-}
+// Function to create a new task
+function addTask() {
+  const taskInput = document.getElementById("taskInput");
+  const taskValue = taskInput.value.trim();
 
-// Add a "checked" symbol when clicking on a list item
-var list = document.querySelector('ul');
-list.addEventListener('click', function(ev) {
-  if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');
-  }
-}, false);
-
-// Creating a new list item when clicking on the "Add" button
-function newElement() {
-  var li = document.createElement("li");
-  var inputValue = document.getElementById("myInput").value;
-  var t = document.createTextNode(inputValue);
-  li.appendChild(t);
-  if (inputValue === '') {
+  if (taskValue === '') {
     alert("You must write something!");
-  } else {
-    document.getElementById("myUL").appendChild(li);
+    return;
   }
-  document.getElementById("myInput").value = "";
 
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  li.appendChild(span);
+  const li = document.createElement("li");
+  li.className = "task";
+  li.textContent = taskValue;
 
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
-      var div = this.parentElement;
-      div.style.display = "none";
+  const closeSpan = createCloseButton();
+  li.appendChild(closeSpan);
+
+  document.getElementById("taskList").appendChild(li);
+  taskInput.value = "";
+
+  addCloseButtons();
+  toggleTaskStatus();
+}
+
+// Function to add close buttons to each task
+function addCloseButtons() {
+  const tasks = document.getElementsByClassName("task");
+  for (let i = 0; i < tasks.length; i++) {
+    const closeSpan = tasks[i].querySelector('.close');
+    if (!closeSpan) {
+      const span = createCloseButton();
+      tasks[i].appendChild(span);
     }
   }
+
+  const closeButtons = document.getElementsByClassName("close");
+  for (let i = 0; i < closeButtons.length; i++) {
+    closeButtons[i].onclick = function () {
+      const task = this.parentElement;
+      task.style.display = "none";
+    };
+  }
 }
-</script>
+
+// Helper function to create the close button element
+function createCloseButton() {
+  const span = document.createElement("span");
+  span.className = "close";
+  span.textContent = "\u00D7";
+  return span;
+}
+
+// Toggle the checked status of tasks
+function toggleTaskStatus() {
+  const list = document.getElementById('taskList');
+  list.addEventListener('click', function (ev) {
+    if (ev.target.tagName === 'LI') {
+      ev.target.classList.toggle('checked');
+    }
+  }, false);
+}
+
+
+  </script>
 
 </body>
 </html>
